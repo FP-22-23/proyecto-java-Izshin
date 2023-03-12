@@ -7,6 +7,7 @@ Estructura de las carpetas del proyecto
 
 /src: Directorio con el código fuente.
 fp.Bicis: Paquete que contiene los tipos del proyecto.
+fp.common: con los enum DiaSemana y Estacion
 fp.Test: Paquete que contiene las clases de test del proyecto.
 fp.utiles: Paquete que contiene las clases de utilidad.
 /data: Contiene el dataset del proyecto.
