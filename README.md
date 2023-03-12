@@ -1,8 +1,12 @@
 # proyecto-java-Izshin
+
 proyecto-java-Izshin created by GitHub Classroom
 Proyecto 2023 FP Grupo 4 
+
 Nombre: Iván Fernández Limárquez
 DNI: 77015962W
+
+
 Estructura de las carpetas del proyecto
 
 /src: Directorio con el código fuente.
@@ -13,7 +17,8 @@ fp.utiles: Paquete que contiene las clases de utilidad.
 /data: Contiene el dataset del proyecto.
 bike_sharing_daily.csv: Archivo csv que contiene datos de diferentes partidas de ajedrez.
 
-Estructura del dataset:
+
+#Estructura del dataset:
   https://www.kaggle.com/datasets/contactprad/bike-share-daily-data
   Este dataset se compone de varias columnas, aunque las usadas son:
   instant: Integer Identificador del dato
@@ -25,36 +30,46 @@ Estructura del dataset:
   windspeed: Double velocidad del viento
   
 
-Propiedades:
+
+#Propiedades:
   private Integer Identificacion;
 	private LocalDate Fecha; La fecha en la que se ha realizado el recorrido
 	private DiaSemana DiaSem; Propiedad que dice el dia de la semana
-  private Boolean Laboral; Propiedad que dice si el dia es laboral o no
+ 	private Boolean Laboral; Propiedad que dice si el dia es laboral o no
 	private Boolean Vacaciones; Propiedad que dice si el dia es en vacaciones o no
 	private Double Temperatura; La temperatura del dia
 	private Double VelViento; La velocidad del viento del dia
-
 	private List<Double> CondicionesDiarias; Lista con la temperatura y velocidad del viento
-Tipos auxiliares:
+	
+	
+	
+#Tipos auxiliares:
   private TipoEstacion Estacion; ENUM de la estacion en la que se ha realizado el recorrido
 	private SensacionTermica Sensacion; ENUM propiedad derivada que, en base a la temperatura, dice la sensacion termica
 
 
-Archivos:
+#Archivos:
 
   Bicicletas: Interfaz, contiene todas las funciones principales del proyecto
   BicicletasIMPL: Clase, Implementa todas las funciones y agrega las funciones basicas como el hascode, toString, o compare to.
+  
+  
 
-Constructores:
+#Constructores:
 C1: Tiene un parámetro por cada propiedad básica del tipo.
 C2: Crea un objeto de tipo Partida a partir de los siguientes parámetros: Integer Identificacion, LocalDate Fecha, DiaSemana DiaSem, 
 			Boolean Laboral, Boolean Vacaciones,Double Temperatura, Double VelViento, TipoEstacion Estacion
-Restricciones:
+			
+			
+			
+#Restricciones:
   La temperatura tiene que estar entre 0 y 1
   El año de la fecha no puede ser mayor que el actual
-Funciones:
-
-   Integer getIdentificacion(); Retorna el numero identificativo del recorrido
+  
+  
+  
+#Funciones:
+	Integer getIdentificacion(); Retorna el numero identificativo del recorrido
 	 LocalDate getFecha(); Retorna la fecha
 	 DiaSemana getDiaSem(); Retorna el dia de la semana
 	 Boolean getLaboral(); Retorna si es la boral o no
