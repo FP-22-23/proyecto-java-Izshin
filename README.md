@@ -43,22 +43,26 @@ bike_sharing_daily.csv: Archivo csv que contiene datos de diferentes partidas de
 	
 	
 	
+	
 #Tipos auxiliares:
   private TipoEstacion Estacion; ENUM de la estacion en la que se ha realizado el recorrido
 	private SensacionTermica Sensacion; ENUM propiedad derivada que, en base a la temperatura, dice la sensacion termica
+	private List <CondicionesLab> CondLab; RECORD que devuelve las condiciones laborales del dia, si es laboral y/o vacaciones
 
 
 #Archivos:
 
   Bicicletas: Interfaz, contiene todas las funciones principales del proyecto
   BicicletasIMPL: Clase, Implementa todas las funciones y agrega las funciones basicas como el hascode, toString, o compare to.
-  
+  FactoriaBicicletas: Clase que se ocupa de leer el csv y parsear los diversos aspectos del mismo, muchos de los parsea incluidos en esta 
+  factoria se encargan de transmutar los Integer del csv en los tipos de BicicletasIMPL, por ejemplo parseaDiaSem se encarga en asignar
+  cada numero a un dia de la semana.
   
 
 #Constructores:
 C1: Tiene un parámetro por cada propiedad básica del tipo.
 C2: Crea un objeto de tipo Partida a partir de los siguientes parámetros: Integer Identificacion, LocalDate Fecha, DiaSemana DiaSem, 
-			Boolean Laboral, Boolean Vacaciones,Double Temperatura, Double VelViento, TipoEstacion Estacion
+Boolean Laboral, Boolean Vacaciones,Double Temperatura, Double VelViento, TipoEstacion Estacion
 			
 			
 			
@@ -88,3 +92,9 @@ C2: Crea un objeto de tipo Partida a partir de los siguientes parámetros: Integ
 	 void setVelViento(Double velViento);Cambia la velocidad del viento de un objeto tipo Bicicletas
 	 void setEstacion(TipoEstacion estacion); Cambia la estacion de un objeto tipo Bicicletas
 	 int compareTo(Bicicletas b2); Compara dos objetos de tipo Bicicletas
+	 public void Bicis: Crea el set de bicis vacio
+	 public ContenedorBici: agrega todos las instancias del lector en el set
+	 public Set<BicicletasIMPL> TemperaturaIdeal flitra todas las salidas y devuelve solo aquellas con la temperatura clasificada como "ideal"
+	 public Map<Integer, LinkedList> IdentificacionSalida() Toma la identificacion de cada salida como clave y le asigna el dia, la estacion, temperatura 
+	 y velocidad del viento como valores
+	 public Map<Integer, Integer> CuentaLlaves: Toma la identificacion como clave y cuenta cuantas veces se repite en el Set bicicletas.
