@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
+import fp.common.CondicionesLab;
 import fp.common.DiaSemana;
 import fp.common.SensacionTermica;
 import fp.utiles.Checkers;

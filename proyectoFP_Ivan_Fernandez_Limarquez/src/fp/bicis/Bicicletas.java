@@ -3,7 +3,7 @@ package fp.bicis;
 import java.time.LocalDate;
 import java.util.List;
 
-import fp.common.Condiciones;
+import fp.common.CondicionesLab;
 import fp.common.DiaSemana;
 import fp.common.SensacionTermica;
 

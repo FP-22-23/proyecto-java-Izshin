@@ -3,10 +3,10 @@ import java.time.LocalDate;
 
 import fp.bicis.Bicicletas;
 import fp.bicis.BicicletasIMPL;
-import fp.bicis.CondicionesLab;
 import fp.bicis.ContenedorBici;
 import fp.bicis.FactoriaBicis;
 import fp.bicis.TipoEstacion;
+import fp.common.CondicionesLab;
 import fp.common.DiaSemana;
 import fp.common.SensacionTermica;
 import vino.FactoriaVinos;
