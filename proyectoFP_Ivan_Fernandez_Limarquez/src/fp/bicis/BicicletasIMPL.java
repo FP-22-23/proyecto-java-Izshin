@@ -1,9 +1,14 @@
 package fp.bicis;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 import fp.common.DiaSemana;
 import fp.common.SensacionTermica;
@@ -11,21 +16,18 @@ import fp.utiles.Checkers;
 
 public class BicicletasIMPL implements Comparable<Bicicletas>, Bicicletas {
 
-//NOTA: Las variables en comentarios se implementaran mas adelante en la segunda entrega,
-	//pues en el csv los Dias de la semana, laborales y estacion vienen dados por numeros.
+
 	private Integer Identificacion;
 	private LocalDate Fecha;
-	//private Integer Dia;
 	private DiaSemana DiaSem;
-	//private Integer Lab;
 	private Boolean Laboral;
 	private Boolean Vacaciones;
 	private Double Temperatura;
 	private Double VelViento;
-	//private Integer Est;
 	private TipoEstacion Estacion;
 	private SensacionTermica Sensacion;
 	private List<Double> CondicionesDiarias;
+	private List <CondicionesLab> CondLab;
 	public BicicletasIMPL() {
 		Identificacion= 8676;
 		Fecha= LocalDate.of(2022, 12, 25);
@@ -39,6 +41,9 @@ public class BicicletasIMPL implements Comparable<Bicicletas>, Bicicletas {
 		CondicionesDiarias= new LinkedList<>();
 		CondicionesDiarias.add(Temperatura);
 		CondicionesDiarias.add(VelViento);
+		CondLab=new LinkedList<CondicionesLab>();
+		
+
 	}
 	
 	public BicicletasIMPL(Integer Identificacion, LocalDate Fecha, DiaSemana DiaSem, 
@@ -58,9 +63,25 @@ public class BicicletasIMPL implements Comparable<Bicicletas>, Bicicletas {
 		this.CondicionesDiarias= new LinkedList<>();
 		this.CondicionesDiarias.add(Temperatura);
 		this.CondicionesDiarias.add(VelViento);
+		this.CondLab= new LinkedList<CondicionesLab>();
+		
 		
 
 	}
+	
+	
+
+
+
+	private List<CondicionesLab> getCondiconesLab() {
+		return CondLab;
+	}
+	public List<CondicionesLab> importa(CondicionesLab Laboral){
+		CondLab.add(Laboral);
+		return CondLab;
+
+		
+	};
 	public List<Double> getCondicionesDiarias() {
 		
 		return CondicionesDiarias;
@@ -104,59 +125,6 @@ public class BicicletasIMPL implements Comparable<Bicicletas>, Bicicletas {
 	}
 	
 	
-//	public DiaSemana getDiaSem() {
-//		switch(Dia) {
-//		case 0:
-//			return DiaSem.DOMINGO;
-//		case 1:
-//			return DiaSem.LUNES;
-//		case 2: 
-//			return DiaSem.MARTES;
-//		case 3:
-//			return DiaSem.MIERCOLES;
-//		case 4:
-//			return DiaSem.JUEVES;
-//		case 5:
-//			return DiaSem.VIERNES;
-//
-//		default:
-//			return DiaSem.SABADO;
-//		
-//					
-//		}
-//	}
-//	public Boolean getLaboral() {
-//		if(Lab==1) {
-//			Laboral=true;
-//			
-//		}
-//		else
-//			Laboral=false;
-//		return Laboral;
-//	}
-//	public Boolean getVacaciones() {
-//		return Vacaciones;
-//	}
-//	public Float getTemperatura() {
-//		return Temperatura;
-//	}
-//	public Float getVelViento() {
-//		return VelViento;
-//	}
-//	public TipoEstacion getEstacion() {
-//		switch(Est) {
-//		case 1:
-//			return Estacion.INVIERNO;
-//		case 2: 
-//			return Estacion.PRIMAVERA;
-//		case 3:
-//			return Estacion.VERANO;
-//	
-//	   default:
-//			return Estacion.OTOÑO;
-//	}
-//	}
-
 	
 
 
@@ -211,9 +179,11 @@ public class BicicletasIMPL implements Comparable<Bicicletas>, Bicicletas {
 	
 	public String toString() {
 	return "Bicis" + "["+getIdentificacion() +","+ getFecha()+","+getLaboral()+ ","+getDiaSem() + ","
-	+getLaboral()+ ","+getEstacion()+ ","+getVacaciones()+ ","+getTemperatura()+","+getVelViento()+","+getSensacion()+"]";
+	+getLaboral()+ ","+getEstacion()+ ","+getVacaciones()+ ","+getTemperatura()+","+getVelViento()+","+getSensacion()+ ","+getCondiconesLab()+"]";
 }
 	
+
+
 	public int compareTo(Bicicletas c) {
 		int res=getIdentificacion().compareTo(c.getIdentificacion());
 		return res;

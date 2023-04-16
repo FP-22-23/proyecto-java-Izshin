@@ -3,6 +3,7 @@ package fp.bicis;
 import java.time.LocalDate;
 import java.util.List;
 
+import fp.common.Condiciones;
 import fp.common.DiaSemana;
 import fp.common.SensacionTermica;
 
@@ -26,5 +27,6 @@ public interface Bicicletas {
 	 void setVelViento(Double velViento);
 	 void setEstacion(TipoEstacion estacion); 
 	 int compareTo(Bicicletas b2);
+	List<CondicionesLab> importa(CondicionesLab b);
 	
 }
