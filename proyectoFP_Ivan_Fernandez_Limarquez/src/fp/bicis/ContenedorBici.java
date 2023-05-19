@@ -3,14 +3,21 @@ package fp.bicis;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
 import fp.common.DiaSemana;
@@ -62,6 +69,9 @@ public class ContenedorBici {
 		};
 			return false;
 	}
+	public boolean ExisteSalidaEnFechaStream(LocalDate fecha) {
+		return Bicis.stream().anyMatch(s->fecha.equals(s.getFecha()));
+	}
 	
 	public Double MediaTemperatura(){
 		Double contador=0.00;
@@ -69,6 +79,9 @@ public class ContenedorBici {
 			contador=contador+p.getTemperatura();
 		}
 			return contador/Bicis.size();
+	}
+	public Double MediaTemperaturaStream() {
+		return Bicis.stream().mapToDouble(BicicletasIMPL::getTemperatura).average().getAsDouble();
 	}
 	public Set<BicicletasIMPL> TemperaturaIdeal(){
 		HashSet<BicicletasIMPL> res = new HashSet<BicicletasIMPL>();
@@ -80,6 +93,11 @@ public class ContenedorBici {
 			
 		};
 		return res;
+	}
+	
+	public Set<BicicletasIMPL> TemperaturaIdealStream(){
+		return Bicis.stream().filter(s->SensacionTermica.IDEAL==s.getSensacion())
+				.map(s->s).distinct().collect(Collectors.toSet());
 	}
 	public Map<Integer, LinkedList> IdentificacionSalida(){
 		Map<Integer, LinkedList>  res = new HashMap<Integer, LinkedList>();
@@ -111,7 +129,46 @@ public class ContenedorBici {
 			}
 		return res;
 	}
+	public Map<Object, Long> CuentaLlavesStream(){
+		return Bicis.stream().collect(Collectors.groupingBy(s->s.getIdentificacion(), Collectors.counting()));
+	}
 	
+	public Double TemperaturaMasBaja() {
+		return Bicis.stream().filter(s->SensacionTermica.FRIO==s.getSensacion()).
+				mapToDouble(BicicletasIMPL::getTemperatura).min().getAsDouble();
+	}
+	
+	
+	public List<Integer> TemperaturasDiasNoLaboralesOrdenadas(){
+	Comparator<BicicletasIMPL> c= Comparator.comparing(BicicletasIMPL::getTemperatura);
+	return Bicis.stream().filter(s->false==s.getLaboral()).sorted(c.reversed()).map(BicicletasIMPL::getIdentificacion).collect(Collectors.toList());
+	}
+	
+	public Object CreaSetsYSetsDeSeguridad(){
+		return Bicis.stream().collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
+	}
+
+	
+	public Map<Object, Optional<BicicletasIMPL>> TemperaturasMinimasEnTiposDeDia(){
+		Comparator<BicicletasIMPL> c= Comparator.comparing(BicicletasIMPL::getTemperatura);
+		return Bicis.stream().collect(Collectors.groupingBy(s->s.getSensacion(), Collectors.minBy(c)));
+	}
+	
+	public List<BicicletasIMPL> Naux(List<BicicletasIMPL> l , Integer n){return l.stream()
+		.sorted(Comparator.comparing(i->i.getTemperatura())).limit(n).collect(Collectors.toList());}
+
+	public SortedMap<SensacionTermica, List<BicicletasIMPL>> NTemperaturasMasAltasTiposDeDia(Integer n){
+		
+		return Bicis.stream().collect(Collectors
+				.groupingBy(s->s.getSensacion(), TreeMap::new ,Collectors.collectingAndThen(Collectors.toList(), l->Naux(l,n))));
+	}
+	public Map<SensacionTermica, Long> AcumuladorSensacion(){
+		return Bicis.stream().collect(Collectors.groupingBy(BicicletasIMPL::getSensacion, Collectors.counting()));
+	}
+	public SensacionTermica SensacionMasRepetida() {
+		Map<SensacionTermica,Long> res=AcumuladorSensacion();
+	return res.entrySet().stream().max(Comparator.comparing(i->i.getValue())).get(
+			).getKey();}
 	public int hashCode() {
 		return Objects.hash(Bicis);
 	}

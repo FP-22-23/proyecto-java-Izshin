@@ -42,13 +42,25 @@ public class TestBici {
 		BicicletasIMPL b3= new BicicletasIMPL(67, LocalDate.of(2020, 2, 3), DiaSemana.MARTES, true, false, 0.70, 0.9384, TipoEstacion.INVIERNO);
 		B.AgregaVariasBicis(b1, b3);
 		System.out.println(B.getnBici());
+		
+
+		
 		System.out.println(B.ExisteSalidaEnFecha(LocalDate.of(2020, 2, 3)));
+		
+
+		
 		System.out.println(B.MediaTemperatura());
+		
+		
+
 		System.out.println(B.TemperaturaIdeal());
+		
+
+		
 		System.out.println(B.IdentificacionSalida());
 		//Las identificaciones 67 y 70 cuenta 2 b1 /agregada en agregar varias bicis y la del csv
 		System.out.println(B.CuentaLlaves());
-	
+
 	}
 	
 }
